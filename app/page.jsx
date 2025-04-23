@@ -33,10 +33,10 @@ const Home = () => {
             <LinkToPages/>
           </div>
       
-        <div className='relative'>
+        <div className=''>
      { isUserLoaded && user.imageUrl &&
     
-    <div className='w-[12] h-[12] rounded-full'>
+    <div className='relative w-[12] h-[12] rounded-full'>
                 <Image
                 onClick={() => setToggle(prev => !prev)}
                 className='w-full h-full object-contain rounded-full cursor-pointer'
@@ -44,16 +44,19 @@ const Home = () => {
                 width={1200}
                 height={1200}
                 alt='Profil bild'/>
-            </div>
-      }
-          { toggle &&
-          <div className='relative bg-white border-2 w-[12] h-[12] rounded-lg '>
+                          { toggle &&
+          <div className='absolute px-2 top-[11vh] right-0 bg-white border-2 rounded-lg max-sm:top-15'>
               <SignOutButton>
-                <button className='text-black cursor-pointer hover:bg-black/40'>Logga&nbsp;ut</button>
+                <button className='text-black cursor-pointer hover:bg-black/40'>Log&nbsp;out</button>
               </SignOutButton>
           </div>
           }
+            </div>
+      }
+    
+
         </div>
+
       </nav>
       <div className='flex-10'>
         {

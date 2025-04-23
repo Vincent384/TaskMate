@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Input } from './input'
+import { Plus } from 'lucide-react'
+import { Category } from './Category'
 
 const CreatePage = () => {
 
@@ -7,7 +9,11 @@ const CreatePage = () => {
     title:'',
     work:''
   })
-
+  
+  const [chooseCategory, setChooseCategory] = useState({
+    category:''
+  })
+  
   const [formArray, setFormArray] = useState([])
 
   function onChangeHandler(e){
@@ -49,23 +55,23 @@ const CreatePage = () => {
 
       <form onSubmit={e => onSubmitHandler(e)} className=''>
         <Input
-         placeholderText={'Min titel...'} 
-         labelText={'Titel'} 
+         placeholderText={'My title...'} 
+         labelText={'Title'} 
          inputType={'text'}
          valueInput={form.title}
          onChangeHandler={onChangeHandler}
          nameInput={'title'} 
          textArea={false} />
         <Input
-         placeholderText={'Min uppgift är...'} 
-         labelText={'Din Uppgift'} 
+         placeholderText={'My task is...'} 
+         labelText={'Tasks'} 
          inputType={'text'}
          valueInput={form.work}
          onChangeHandler={onChangeHandler}
          nameInput={'work'} 
          textArea={true} />
-         <button className='w-full py-2 bg-emerald-600 cursor-pointer text-white font-semibold mt-5 rounded-lg
-        transision-all hover:bg-emerald-800'>Lägg till</button>
+         <button className='w-full flex items-center justify-center gap-2 py-2 bg-emerald-600 cursor-pointer text-white font-semibold mt-5 rounded-lg
+        transision-all hover:bg-emerald-800'>Add<Plus className='border-white border-2 rounded-full ' /></button>
       </form>
       {
         form.title !== '' ? 
@@ -85,6 +91,10 @@ const CreatePage = () => {
           </div>
         )) :''
       }
+
+      <div className=''>
+        <Category chooseCategory={chooseCategory} setChooseCategory={setChooseCategory}/>
+      </div>
         </div>
     </div>
   )

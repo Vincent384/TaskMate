@@ -13,7 +13,7 @@ export const Input = ({placeholderText,
       <div className='flex flex-col gap-3 mt-5'>
        
         <label className='text-lg' htmlFor="">{labelText}</label>
-        <textarea className='border rounded-lg resize-none min-h-[100px]'
+        <textarea className='border pl-2 pt-1 rounded-lg resize-none min-h-[100px]'
         name={nameInput}
         value={valueInput} onChange={e => onChangeHandler(e)}
         placeholder={placeholderText} id=""></textarea>
