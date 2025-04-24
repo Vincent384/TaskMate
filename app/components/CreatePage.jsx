@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Input } from './input'
 import { Plus } from 'lucide-react'
 import { Category } from './Category'
+import { Calender } from './Calender'
 
 const CreatePage = () => {
 
@@ -94,6 +95,9 @@ const CreatePage = () => {
 
       <div className=''>
         <Category chooseCategory={chooseCategory} setChooseCategory={setChooseCategory}/>
+      </div>
+      <div className='mt-5'>
+        <Calender/>
       </div>
         </div>
     </div>
