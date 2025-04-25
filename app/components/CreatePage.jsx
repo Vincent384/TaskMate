@@ -2,14 +2,19 @@ import React, { useState } from 'react'
 import { Input } from './input'
 import { Plus } from 'lucide-react'
 import { Category } from './Category'
-import { Calender } from './Calender'
+import { Calendar } from '@/components/ui/calendar'
+
 
 const CreatePage = () => {
 
   const [form, setForm] = useState({
     title:'',
-    work:''
+    work:[]
   })
+
+  const [taskInput, setTaskInput] = useState('')
+
+  const [date, setDate] = useState(new Date())
   
   const [chooseCategory, setChooseCategory] = useState({
     category:''
@@ -20,35 +25,34 @@ const CreatePage = () => {
   function onChangeHandler(e){
     const {name,value} = e.target
     
-    setForm((prev) => {
-      return {
+
+    if (name === 'title') {
+      setForm((prev) => ({
         ...prev,
-        [name]:value
-      }
-    })
+        [name]: value
+      }));
+    } else if (name === 'work') {
+      setTaskInput(value); // vi uppdaterar bara inputen, inte arrayen direkt
+    }
   }
 
   console.log(formArray)
 
   function onSubmitHandler(e){
     e.preventDefault()
-
-    setFormArray((prev) => {
-      return [
-        ...prev,
-        {
-          work:form.work
-        }
-      ]
-    })
+    
+    if(taskInput.trim() === '') return
 
     setForm((prev) => {
       return {
         ...prev,
-        work:''
+        work:[...prev.work,taskInput]
       }
     })
   }
+
+  console.log(formArray)
+  console.log(form)
 
   return (
     <div className='flex justify-center items-center'>
@@ -67,7 +71,7 @@ const CreatePage = () => {
          placeholderText={'My task is...'} 
          labelText={'Tasks'} 
          inputType={'text'}
-         valueInput={form.work}
+         valueInput={taskInput}
          onChangeHandler={onChangeHandler}
          nameInput={'work'} 
          textArea={true} />
@@ -86,9 +90,9 @@ const CreatePage = () => {
           </div> :''
       }
       {
-      formArray && formArray.length > 0 ? formArray.map((item,index) => (
+      form.work && form.work.length > 0 ? form.work.map((item,index) => (
           <div key={index}>
-            <p className='py-2 px-4 font-semibold bg-amber-400 rounded-lg w-full mt-3 '>{item.work}</p>
+            <p className='py-2 px-4 font-semibold bg-amber-400 rounded-lg w-full mt-3 '>{item}</p>
           </div>
         )) :''
       }
@@ -97,7 +101,19 @@ const CreatePage = () => {
         <Category chooseCategory={chooseCategory} setChooseCategory={setChooseCategory}/>
       </div>
       <div className='mt-5'>
-        <Calender/>
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={(selectedDate) => {
+            setFormArray((prev) => [
+              ...prev,
+              { 
+                date:date.toLocaleDateString()
+              }
+            ])
+            setDate(selectedDate)
+          }}
+        />
       </div>
         </div>
     </div>

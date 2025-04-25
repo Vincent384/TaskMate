@@ -67,7 +67,7 @@ function onClickHandler(item){
         <>
             {
                     toggle && (
-                    <div ref={calenderRef} className='absolute flex flex-col top-15.5 right-0
+                    <div ref={calenderRef} className='absolute z-50 flex flex-col top-15.5 right-0
                      w-[125px] bg-gray-50 border rounded-bl-md rounded-br-md'>
                         {
                             menuCategories.map((item,index) =>(
